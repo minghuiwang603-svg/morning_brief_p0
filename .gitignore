@@ -10,3 +10,5 @@ __pycache__/
 venv/
 # 编辑器配置
 .vscode/
+#密码文件
+.env
