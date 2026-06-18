@@ -9,7 +9,7 @@ def summarize(articles: list) -> str:
     # （你写）
     content=""
     for article in articles:                 
-       content += article["title"] + "\n"     
+       content += article["title"] + "\n" + article["body"] + "\n\n"
     # —— 第2块：造 client（照抄你 Day17 test_llm.py 那三行：load_dotenv / 取 key / OpenAI(...)）——
     # （你写）
     load_dotenv()
