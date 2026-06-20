@@ -11,23 +11,14 @@ def clean_html(text):
 def summarize(articles: list) -> str:
     # —— 第1块：把所有标题拼成一段文本 ——
     # for 遍历 articles，把每个 article["title"] 接进一个字符串，每个后面加 "\n"
-    # （你写）
     content=""
     for article in articles:                 
         content += article["title"] + "\n" + clean_html(article["body"]) + "\n\n"
     # —— 第2块：造 client（照抄你 Day17 test_llm.py 那三行：load_dotenv / 取 key / OpenAI(...)）——
-    # （你写）
     load_dotenv()
     d_key=os.environ.get("DEEPSEEK_API_KEY")
     client = OpenAI(api_key=d_key,base_url="https://api.deepseek.com")
     # —— 第3块：调 DeepSeek，messages 两条 ——
-    # response = client.chat.completions.create(
-    #     model="deepseek-chat",
-    #     messages=[
-    #         {"role": "system",  "content": "你写规矩：中文、3句以内、不带链接、口吻像今日导读"},
-    #         {"role": "user",    "content": 第1块拼出来的标题文本},
-    #     ],
-    # )
     response=client.chat.completions.create(
         model="deepseek-chat",
         messages=[
