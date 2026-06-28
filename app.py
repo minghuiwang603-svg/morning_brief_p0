@@ -2,14 +2,20 @@ from fastapi import FastAPI,HTTPException
 from fetch import fetch
 from parse import parse
 from summarize import summarize
+from pydantic import BaseModel
 URL = "https://www.ruanyifeng.com/blog/atom.xml"
 
 app = FastAPI()
 
+class Article(BaseModel):
+    title: str
+    link: str
+    summary: str  
+
 @app.get("/")
 def home():
     return {"message": "晨报服务 Day1 跑通"}
-@app.get("/brief")
+@app.get("/brief", response_model=list[Article])
 def brief(count: int = 3):
     try:
         articles = parse(fetch(URL))[:count]
